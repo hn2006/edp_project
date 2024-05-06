@@ -31,6 +31,16 @@ const sampleSchema = new Schema({
 
 const EDPModel = mongoose.model('edp_data', sampleSchema);
 
+app.get('/', async (req, res) => {
+  try {
+    const samples = await EDPModel.find();
+    res.json(samples);
+  } catch (error) {
+    console.error('Error querying samples:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.get('/details', async (req, res) => {
   try {
     const samples = await EDPModel.find();
