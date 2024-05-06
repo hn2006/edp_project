@@ -37,7 +37,7 @@ app.get('/', async (req, res) => {
     res.json(samples);
   } catch (error) {
     console.error('Error querying samples:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.json({ error: 'Internal server error' });
   }
 });
 
