@@ -72,6 +72,34 @@ app.post('/addData',async(req,res)=>{
       }
 });
 
+app.get('/dashboard_details',async(req,res)=>{
+
+  try {
+      const data =await EDPModel.find();
+      const new_data=[];
+      var max_speed=-1,min_speed=100,total=0;
+      data.forEach((data)=>{
+        if(Number(data.speed)>max_speed){
+          max_speed=Number(data.speed);
+        }
+        if(Number(data.speed)<min_speed){
+          min_speed=Number(data.speed);
+        }
+        total=total+Number(data.speed);
+      })
+
+      const n=data.length;
+      for(var i=n-5;i<n;i++){
+        new_data.push(data[i]);
+      }
+      console.log(new_data);
+      res.status(201).json({max_speed:max_speed.toPrecision(2),min_speed:min_speed.toPrecision(2),avg_speed:(total/n).toPrecision(2),data:new_data});
+    } catch (error) {
+      console.error('Error creating sample:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.listen(8000, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
