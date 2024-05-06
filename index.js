@@ -27,6 +27,12 @@ const sampleSchema = new Schema({
   weather_condition:String,
   nearby_places: String,
   visibility:String,
+  speed:{
+    type:String,
+    default:'0'
+  },
+  pwm:String,
+  location:String
 });
 
 const EDPModel = mongoose.model('edp_data', sampleSchema);
