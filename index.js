@@ -66,6 +66,6 @@ app.post('/addData',async(req,res)=>{
       }
 });
 
-app.listen(PORT, () => {
+app.listen(8000, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
