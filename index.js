@@ -89,8 +89,12 @@ app.get('/dashboard_details',async(req,res)=>{
       })
 
       const n=data.length;
-      for(var i=n-5;i<n;i++){
-        new_data.push(data[i]);
+      for(var i=n-30;i<n;i++){
+
+        if(i>=0){
+          new_data.push(data[i]);
+        }
+        
       }
       console.log(new_data);
       res.status(201).json({max_speed:max_speed.toPrecision(2),min_speed:min_speed.toPrecision(2),avg_speed:(total/n).toPrecision(2),data:new_data});
